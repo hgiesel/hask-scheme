@@ -1,0 +1,1 @@
+pbcopy is aliased to `reattach-to-user-namespace pbcopy 2> /dev/null'
