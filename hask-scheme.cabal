@@ -18,8 +18,10 @@ library
   exposed-modules:     Lib
                      , Parser
                      , SchemeVal
+                     , Eval
   build-depends:       base >= 4.7 && < 5
                      , parsec
+                     , containers
   default-language:    Haskell2010
 
 executable hscheme

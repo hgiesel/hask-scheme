@@ -1,6 +1,7 @@
 module Lib where
 
 
+import qualified Eval      as Ev
 import qualified Parser    as Pr
 import qualified SchemeVal as Sv
 
@@ -30,4 +31,4 @@ readPrompt prompt = flushStr prompt >> getLine
 parseCommands :: IO ()
 parseCommands = forever $ do
   input <- readPrompt . colorMagenta $ "repl>> "
-  bool (putStrLn $ Pr.readExpr input) exitSuccess $ input == ":q"
+  bool (putStrLn . show . Ev.eval . Pr.readExpr $ input) exitSuccess $ input == ":q"

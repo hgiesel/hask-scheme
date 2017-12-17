@@ -10,16 +10,13 @@ import Text.Parsec.Char ( string
                         , anyChar
                         )
 
-spaces :: Ps.Parsec String () ()
-spaces = Ps.skipMany1 Ps.space
-
 symbol :: Ps.Parsec String () Char
 symbol = Ps.oneOf "!#$%&|*+-/:<=>?@^_~"
 
-readExpr :: String -> String
+readExpr :: String -> SchemeVal
 readExpr input = case Ps.parse parseExpr "Lisp" input of
-  Left  err -> "No match: " ++ show err
-  Right val -> "Found value: " ++ (show val)
+  Left  err -> SString $ "No match: " ++ show err
+  Right val -> val
 
 parseExpr :: Ps.Parsec String () SchemeVal
 parseExpr = parseSimpleExpression Ps.<|> parseParenList
